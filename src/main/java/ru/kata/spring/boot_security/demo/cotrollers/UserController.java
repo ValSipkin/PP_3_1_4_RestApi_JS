@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
@@ -20,11 +21,17 @@ public class UserController {
         this.userService = userService;
         this.roleService = roleService;
     }
+
     @GetMapping
-    public String userPage(Principal principal, Model model) {
-        User user = userService.findByUsername(principal.getName());
-        model.addAttribute("user", user);
-        model.addAttribute("currentUser", principal.getName());
+    public String test(Model model, Principal principal) {
+        User currentUser = userService.findByUsername(principal.getName());
+        String currentUserRoles = "";
+        for (Role role : currentUser.getRoles()) {
+            currentUserRoles += role.getName() + " ";
+        }
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("currentUserRoles", currentUserRoles);
+
         return "user";
     }
 }

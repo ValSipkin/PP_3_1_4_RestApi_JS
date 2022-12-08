@@ -101,4 +101,12 @@ public class User implements UserDetails {
     public void setRolesId(int[] rolesId) {
         this.rolesId = rolesId;
     }
+
+    public String getRolesAsString() {
+        String rolesStr = "";
+        for (Role role : getRoles()) {
+            rolesStr += role.getName() + " ";
+        }
+        return rolesStr;
+    }
 }
