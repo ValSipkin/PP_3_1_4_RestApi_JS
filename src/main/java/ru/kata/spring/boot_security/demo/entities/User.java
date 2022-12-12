@@ -23,8 +23,6 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-    @Transient
-    private int[] rolesId ;
 
     public User() {
     }
@@ -94,13 +92,6 @@ public class User implements UserDetails {
         return true;
     }
 
-    public int[] getRolesId() {
-        return rolesId;
-    }
-
-    public void setRolesId(int[] rolesId) {
-        this.rolesId = rolesId;
-    }
 
     public String getRolesAsString() {
         String rolesStr = "";

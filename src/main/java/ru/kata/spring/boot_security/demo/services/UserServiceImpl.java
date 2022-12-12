@@ -48,6 +48,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
+
+    @Override
+    public void deleteUser(Integer id) {
+        userRepository.deleteById(id);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

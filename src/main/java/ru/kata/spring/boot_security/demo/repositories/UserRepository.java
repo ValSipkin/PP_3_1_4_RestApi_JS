@@ -10,5 +10,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "select user from User user left join fetch user.roles where user.username = :username")
     User findByUsername(@Param("username") String username);
+    @Query(value = "select user from User user left join fetch user.roles where user.id = :id")
+    User getById(@Param("id") int id);
     List<User> findAll();
 }
